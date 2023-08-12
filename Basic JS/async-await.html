@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Async - Await</title>
+<script>
+    async function test(){
+        console.log("2 :  message");
+
+        const  response = await fetch("json/stud-data.json");
+        
+        console.log("3 : message");
+        
+        const studs = await response.json();
+
+        return studs;
+
+        // one liner
+
+        // return (await fetch("json/stud-data.json")).json();
+
+        // await console.log("3 : message");
+        // console.log("4 : message");
+    }
+
+    console.log("1 : meassage");
+    // let a = test();
+    console.log("4 : meassage");
+    // console.log(a);
+
+    test().then((res) =>{
+        console.log(res);
+    }).catch((err)=>{
+        console.log(err);
+    });
+    // console.log("6 : meassage");
+</script>
+</head>
+<body>
+    
+</body>
+</html>
