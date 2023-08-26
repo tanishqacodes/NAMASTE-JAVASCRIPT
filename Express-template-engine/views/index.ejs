@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Home page</h1>
+    <h2>This is ejs page which is render using RVC structure.....</h2>
+
+    <h3>
+        hi....
+        <!-- displaying variable data -->
+        <%=
+            name
+        %><br>
+
+        <!-- creating variable -->
+        <% var i = 10; %>
+
+        <!-- displaying variable data -->
+        var = 
+        <%= i %>
+
+        <!-- Comment -->
+        <%# Comment will not be present in rendered HTML %>
+
+        <!-- if -->
+        If condition<br>
+        <% if(name) { %>
+            <div>Helllo this is if block : <%=id %></div>
+        <% } %>
+
+        <!-- for loop -->
+        For condition<br>
+        <% for(i=0;i<=4;i++){ %>
+            <div>This is for body Hello <%= i %> Marks : <%= marks[i] %></div>
+        <% } %>
+
+        <!-- for in loop -->
+        For in loop<br>
+        <% for(const key in marks){ %>
+            <%= key %>
+        <% } %>
+
+        <!-- for of loop -->
+        <br>For of loop<br>
+        <% for(const m of marks){ %>
+            <%= m %>
+        <% } %>
+
+        <!-- while -->
+        <br>While loop<br>
+        <% var i=0 %>
+        <% while(i<=4){ %>
+            <div>While loop : <%= i %></div>
+            <% i++ %>
+        <% } %>
+
+        <!-- for each -->
+        <br>For each<br>
+        <% marks.forEach((value)=>{ %>
+            <div>For each : <% value %></div>
+        <% }); %>
+
+        <!-- funciton call -->
+        <br>Function call<br>
+        current date : 
+        <% var current = new Date(); %>
+        <%= current %>
+    </h3>
+
+</body>
+</html>
