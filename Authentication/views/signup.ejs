@@ -1,0 +1,33 @@
+<%- include('partials/header'); -%>
+
+    <form>
+        <h2>Sign Up</h2>
+        <label for="email">Email</label>
+        <input type="text" name="emailName" required>
+
+        <div class="email error"></div>
+
+        <label for="password">Password</label>
+        <input type="password" name="passwordName" required>
+
+        <div class="password error"></div>
+
+        <button>Sign Up</button>
+    </form>
+
+    <!-- Grab the input form user and send it to server -->
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit',(event)=>{
+            // we don't want to referesh the page
+            event.preventDefault();
+
+            // get the values
+            const email = form.emailName.value;
+            const password  = form.passwordName.value;
+
+            console.log(`Email : ${email} , password : ${password}`);
+        });
+    </script>
+
+<%- include('partials/footer'); -%>
