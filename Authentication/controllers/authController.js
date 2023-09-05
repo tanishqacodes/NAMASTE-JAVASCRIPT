@@ -1,6 +1,9 @@
 // 1. import user model from thw model folder
 const User = require('../models/User');
 
+// jwt authentication
+const jwt = require('jsonwebtoken');
+
 // handle error cutomize error from email & password
 const handleErrors = (err) =>{
     console.log(err.message , err.code);
@@ -23,6 +26,14 @@ const handleErrors = (err) =>{
     return errors;
 }
 
+// max age in seconds
+const maxAge = 3 * 24 * 60 * 60;
+const  createToken = (id) =>{
+    // id is payload from database , 'net ninja secret is a secret => we generate and signature
+    return jwt.sign({ id }, 'net ninja secret' , {
+        expiresIn: maxAge,
+    });
+}
 
 module.exports.signup_get = (req,res) =>{
     res.render('signup');
@@ -40,7 +51,14 @@ module.exports.signup_post = async (req,res) =>{
     // storing signup data into mongoDB
     try {
         const user =  await User.create({email , password});
-        res.status(201).json(user);
+        
+        // JWT => token genreated token
+        const token = createToken(user._id);
+
+        // send JWT with cookie with the response
+        res.cookie('jwt', token , { httpOnly : true , maxAge : maxAge * 1000});
+        
+        res.status(201).json({ user : user._id });
     } catch (error) {
         const errors = handleErrors(error);
         // console.log("Error in signup Post : ",error);
