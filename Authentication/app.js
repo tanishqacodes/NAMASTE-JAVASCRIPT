@@ -4,6 +4,7 @@ const cookiePareser = require("cookie-parser");
 const app = express();
 
 const authRoutes = require('./routes/authRoutes');
+const { requireAuth } = require('./middleware/authMiddleware');
 
 // middleware
 app.use(express.static('public'));
@@ -27,7 +28,7 @@ app.get('/',(req,res)=>{
     res.render('home');
 });
 
-app.get('/smoothies',(req,res)=>{
+app.get('/smoothies',requireAuth,(req,res)=>{
     res.render('smoothies');
 });
 
